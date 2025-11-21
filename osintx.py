@@ -67,7 +67,7 @@ def domain_whois():
     except:
         print(Fore.RED + "Service down")
 
-# মেনু লুপ (এটা সবশেষে থাকবে)
+# Menu loop
     while True:
         banner()
         print(Fore.WHITE + """
