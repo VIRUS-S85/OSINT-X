@@ -13,21 +13,15 @@ def banner():
     print(Fore.CYAN + "═" * 55)
 
 def username_tracker():
-    user = input(Fore.GREEN + "\n[+] Username → " + Fore.WHITE)
-    print(Fore.YELLOW + "Scanning 50+ sites...\n")
-    try:
-        r = requests.get(f"https://api.sherlock-project.xyz/search/{user}")
-        data = r.json()
-        found = 0
-        for site, info in data.items():
-            if info['status'] == 'found':
-                print(Fore.GREEN + f"[✔] {site}: {info['url']}")
-                found += 1
-            else:
-                print(Fore.RED + f"[✘] {site}")
-        print(Fore.CYAN + f"\nTotal Found: {found} sites\n")
-    except:
-        print(Fore.RED + "Sherlock API down or no internet!")
+    user = input(Fore.GREEN + "\n[+] Username → " + Fore.WHITE).strip()
+    if not user:
+        print(Fore.RED + "[!] Empty username!")
+        input(Fore.MAGENTA + "\nPress Enter to continue...")
+        return
+    print(Fore.YELLOW + f"\nScanning 400+ sites for → {user}\n" + "—"*50)
+    os.system(f"python3 $HOME/sherlock/sherlock/sherlock.py {user} --print-found --timeout 10")
+    print(Fore.CYAN + "—"*50)
+    input(Fore.MAGENTA + "\nScan complete! Press Enter to continue...")
 
 def email_breach():
     email = input(Fore.GREEN + "\n[+] Email → " + Fore.WHITE)
